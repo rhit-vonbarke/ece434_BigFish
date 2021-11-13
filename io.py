@@ -26,8 +26,8 @@ def initGPIO():
 	buses = [smbus.SMBus(1), smbus.SMBus(2)]
 	matrixAddr = 0x70         # Use address 0x70
 	
-	PWM.start(SERVO1, 50)
-	PWM.set_frequency(SERVO1, 150)
+	PWM.start(SERVO1, 50, 150)
+	#PWM.set_frequency(SERVO1, 150)
 	print("PWM 50")
 	
 	global newMatrixVals
