@@ -17,6 +17,8 @@ import Adafruit_BBIO.GPIO as GPIO
 LOW = 0
 HIGH = 1
 
+GREEN_BITMASK = 0b11100000
+RED_BITMASK = 0b01111111
 
 def initGPIO():
 	global matrixAddr
@@ -24,12 +26,15 @@ def initGPIO():
 	buses = [smbus.SMBus(1), smbus.SMBus(2)]
 	matrixAddr = 0x70         # Use address 0x70
 	
-	global 
+	global newMatrixVals
+	newMatrixVals = [0] * 16
 	
 	for bus in buses:
 		bus.write_byte_data(matrixAddr, 0x21, 0)   # Start oscillator
 		bus.write_byte_data(matrixAddr, 0x81, 0)   # Disp on, blink off
 		bus.write_byte_data(matrixAddr, 0xe7, 0)   # Full brightness
+	
+	updateMatrix(LOW, 8)
 	
 		
 def clearMatrices():
@@ -42,17 +47,24 @@ def updateMatrix(matrix, values = []):
 	#every 2 elements (bytes of data) in matrix array relate to a single column of the matrix (so array[0] and array[1] are associated with leftmost column).
 	#For each column, first byte is color red and second byte is color green.
 	#For each byte, the bottom of the matrix is associated with the least significant bit and the top of the matrix is associated with the most significant bit.
-	currentVal = bus.read_byte_data(matrixAddr, 2*x) #argument is: address, byte offset (i hope. could be bit offset. we'll see).
-	newVal = currentVal | (1 << y)
-	bus.write_byte_data(matrixAddr, 2*x, newVal)
+	#currentVal = bus.read_byte_data(matrixAddr, 2*x) #argument is: address, byte offset (i hope. could be bit offset. we'll see).
+	#newVal = currentVal | (1 << y)
+	#bus.write_byte_data(matrixAddr, 2*x, newVal)
+	for k in range(len(values)):
+		newVal = getValFromHeight(values[k])
+		newMatrixVals[2*k] = RED_BITMASK & newVal
+		newMatrixVals[2*k+1] = GREEN_BITMASK & newVal
+	buses[matrix].write_block_data(matrixAddr, 0, newMatrixVals)
 	
-
-# set the "on/off" byte (which will be replaced by green/red byte) using stupid large case statement (do kurtis's method)
-# bitmask to set red byte: 11100000 (bitwise AND with data)
-# bitmask to set green byte: 01111111 (bitwise AND with data)
   
-def getValsFromHeight(value):
-	
+def getValFromHeight(value):
+	if (value == 0):
+		return 0
+	binNum = 1
+	for k in range(value):
+		binNum = binNum << 1
+		binNum = binNum | 1
+	return binNum
 
 
   
