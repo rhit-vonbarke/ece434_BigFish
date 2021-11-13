@@ -68,7 +68,7 @@ def getValFromHeight(value):
 	if (value == 0):
 		return 0b0
 	binNum = 0b1
-	for k in range(value):
+	for k in range(value - 1):
 		binNum = binNum << 1
 		binNum = binNum | 1
 	print(binNum)
