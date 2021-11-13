@@ -53,12 +53,8 @@ def updateMatrix(matrix, values = []):
 	#bus.write_byte_data(matrixAddr, 2*x, newVal)
 	for k in range(len(values)):
 		newVal = getValFromHeight(values[k])
-		newMatrixVals[2*k] = RED_BITMASK & newVal
-		newMatrixVals[2*k+1] = GREEN_BITMASK & newVal
-		print("red bitmask")
-		print(newMatrixVals[2*k])
-		print("green bitmask")
-		print(newMatrixVals[2*k+1])
+		newMatrixVals[2*k] = GREEN_BITMASK & newVal
+		newMatrixVals[2*k+1] = RED_BITMASK & newVal
 	buses[matrix].write_i2c_block_data(matrixAddr, 0, newMatrixVals)
 	
   
