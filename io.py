@@ -55,16 +55,15 @@ def updateMatrix(matrix, values = []):
 		newVal = getValFromHeight(values[k])
 		newMatrixVals[2*k] = RED_BITMASK & newVal
 		newMatrixVals[2*k+1] = GREEN_BITMASK & newVal
-		print("/n red bitmask /n")
+		print("red bitmask")
 		print(newMatrixVals[2*k])
-		print("/n green bitmask /n")
+		print("green bitmask")
 		print(newMatrixVals[2*k+1])
 	buses[matrix].write_block_data(matrixAddr, 0, newMatrixVals)
 	
   
 def getValFromHeight(value):
 	print("Getting val from height")
-	print("/n")
 	print(value)
 	if (value == 0):
 		return 0b0
@@ -72,7 +71,6 @@ def getValFromHeight(value):
 	for k in range(value):
 		binNum = binNum << 1
 		binNum = binNum | 1
-	print("/n")
 	print(binNum)
 	return binNum
 
