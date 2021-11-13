@@ -17,8 +17,8 @@ import Adafruit_BBIO.GPIO as GPIO
 LOW = 0
 HIGH = 1
 
-GREEN_BITMASK = 0b11100000
-RED_BITMASK = 0b01111111
+RED_BITMASK = 0b11100000
+GREEN_BITMASK = 0b01111111
 
 def initGPIO():
 	global matrixAddr
@@ -60,8 +60,8 @@ def updateMatrix(matrix, values = []):
   
 def getValFromHeight(value):
 	if (value == 0):
-		return 0
-	binNum = 1
+		return 0b0
+	binNum = 0b1
 	for k in range(value):
 		binNum = binNum << 1
 		binNum = binNum | 1
