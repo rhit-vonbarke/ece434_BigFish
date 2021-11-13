@@ -8,10 +8,8 @@
 #The second LED matrix is used to visualize high frequencies. It is wired to pins p9.19 (i2c clock), p9.20 (i2c data), Vcc (+3.3V), and Gnd. It uses I2C2.
 
 import time
-import sys
 import smbus
-import Adafruit_BBIO.GPIO as GPIO
-
+import Adafruit_BBIO.PWM as PWM
 
 #"constants"
 LOW = 0
@@ -20,11 +18,15 @@ HIGH = 1
 RED_BITMASK = 0b11100000
 GREEN_BITMASK = 0b01111111
 
+SERVO1 = "P9_42"
+
 def initGPIO():
 	global matrixAddr
 	global buses
 	buses = [smbus.SMBus(1), smbus.SMBus(2)]
 	matrixAddr = 0x70         # Use address 0x70
+	
+	PWM.start(SERVO1, 50)
 	
 	global newMatrixVals
 	newMatrixVals = [0] * 16
@@ -36,7 +38,10 @@ def initGPIO():
 	
 	clearMatrices()
 	updateMatrix(LOW, [0, 0, 5, 8, 6, 0, 0, 0])
-	
+	time.sleep(7)
+	PWM.set_duty_cycle(SERVO1, 0)
+	time.sleep(7)
+	PWM.set_duty_cycle(SERVO1, 100)
 		
 def clearMatrices():
 	for bus in buses:
