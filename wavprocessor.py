@@ -1,4 +1,9 @@
-import numpy as np
+#!/usr/bin/python
+
+import os
+import sys
+from scipy.fftpack import fft
+from scipy.io import wavfile
 
 # map the FFT output to 2 matrices each with 8 columns of height 8
 # FFT ranges from -1 to 1
@@ -27,3 +32,34 @@ def set_LED_col_height(input_matrix, col, height):
     for r in range(8-height, 8):
         input_matrix[r][col] = 1
 
+def processaudio(filename):
+    refreshrate = 60 #Hz
+    bitdepth = 8
+    parentpath = os.getcwd()
+    filepath = (parentpath + '/audiodownloads/' + filename +'.wav')
+    print ('File at: ' + filepath)
+    fs, raw = wavfile.read(filepath)
+    print ('Sampling rate (Hz): ' + str(fs))
+    numsamples = len(raw)
+    print ('Number of samples: ' + str(numsamples))
+    #for i in range(numsamples):
+    #    a[i] = (raw[i]/2**bitdepth) * 2 - 1 #normalize to the range [-1,1]
+    #a=[(ele/2**8.)*2-1 for ele in raw]
+    tracklength = int(numsamples / fs)
+    chunklength = int(fs / refreshrate)
+    print ('Track length (s): ' + str(tracklength))
+    print ('Samples per chunk: ' + str(chunklength))
+    startindex = 0
+    while (startindex + chunklength) < numsamples:
+        chunk = raw[startindex:(startindex + chunklength)]
+        res = fft(chunk)
+        spectrum = res[:len(res-1)]
+        startindex += chunklength
+        print(str(len(spectrum)) + '\n' + str(spectrum))
+
+
+def main():
+    print (sys.argv[1])
+    processaudio(sys.argv[1])
+
+main()
