@@ -59,7 +59,7 @@ def updateMatrix(matrix, values = []):
 		print(newMatrixVals[2*k])
 		print("green bitmask")
 		print(newMatrixVals[2*k+1])
-	buses[matrix].write_block_data(matrixAddr, 0, newMatrixVals)
+	buses[matrix].write_i2c_block_data(matrixAddr, 0, newMatrixVals)
 	
   
 def getValFromHeight(value):
