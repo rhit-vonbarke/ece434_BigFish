@@ -5,7 +5,7 @@
 #Purpose: interface with IO
 #Uses two 8x8 bicolor LED matricies (with HT16K33 LED Backpack)
 #The first LED matrix is used to visualize low frequencies. It is wired to pins p9.24 (i2c clock), p9.26 (i2c data), Vcc (+3.3V), and Gnd. It uses I2C1.
-#The second LED matrix is used to visualize high frequencies. It is wired to pins p9.16 (i2c clock), p9.20 (i2c data), Vcc (+3.3V), and Gnd. It uses I2C2.
+#The second LED matrix is used to visualize high frequencies. It is wired to pins p9.19 (i2c clock), p9.20 (i2c data), Vcc (+3.3V), and Gnd. It uses I2C2.
 
 import time
 import sys
