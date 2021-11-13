@@ -27,7 +27,7 @@ def initGPIO():
 	matrixAddr = 0x70         # Use address 0x70
 	
 	PWM.start(SERVO1, 50)
-	PWM.set_frequency(SERVO1, 500)
+	PWM.set_frequency(SERVO1, 50)
 	
 	global newMatrixVals
 	newMatrixVals = [0] * 16
