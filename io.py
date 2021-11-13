@@ -59,12 +59,17 @@ def updateMatrix(matrix, values = []):
 	
   
 def getValFromHeight(value):
+	print("Getting val from height")
+	print("/n")
+	print(value)
 	if (value == 0):
 		return 0b0
 	binNum = 0b1
 	for k in range(value):
 		binNum = binNum << 1
 		binNum = binNum | 1
+	print("/n")
+	print(value)
 	return binNum
 
 
