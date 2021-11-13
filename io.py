@@ -34,7 +34,8 @@ def initGPIO():
 		bus.write_byte_data(matrixAddr, 0x81, 0)   # Disp on, blink off
 		bus.write_byte_data(matrixAddr, 0xe7, 0)   # Full brightness
 	
-	updateMatrix(LOW, [0, 8, 2, 3, 4, 5, 6, 7])
+	clearMatrices()
+	updateMatrix(LOW, [0, 0, 5, 8, 6, 0, 0, 0])
 	
 		
 def clearMatrices():
