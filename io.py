@@ -37,7 +37,14 @@ def initGPIO():
 		bus.write_byte_data(matrixAddr, 0xe7, 0)   # Full brightness
 	
 	clearMatrices()
-	updateMatrix(LOW, [0, 0, 5, 8, 6, 0, 0, 0])
+	
+	for i in range(10):
+		PWM.set_duty_cycle(SERVO1, 5)
+		time.sleep(2)
+		PWM.set_duty_cycle(SERVO1, 95)
+		time.sleep(2)
+	
+	#updateMatrix(LOW, [0, 0, 5, 8, 6, 0, 0, 0])
 		
 def clearMatrices():
 	for bus in buses:
