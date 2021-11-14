@@ -31,10 +31,10 @@ def initGPIO():
 	global newMatrixVals
 	newMatrixVals = [0] * 16
 	
-	for bus in buses:
-		bus.write_byte_data(matrixAddr, 0x21, 0)   # Start oscillator
-		bus.write_byte_data(matrixAddr, 0x81, 0)   # Disp on, blink off
-		bus.write_byte_data(matrixAddr, 0xe7, 0)   # Full brightness
+	#for bus in buses:
+	#	bus.write_byte_data(matrixAddr, 0x21, 0)   # Start oscillator
+	#	bus.write_byte_data(matrixAddr, 0x81, 0)   # Disp on, blink off
+	#	bus.write_byte_data(matrixAddr, 0xe7, 0)   # Full brightness
 	
 	clearMatrices()
 	
