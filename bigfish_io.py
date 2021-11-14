@@ -26,7 +26,7 @@ def initGPIO():
 	buses = [smbus.SMBus(1), smbus.SMBus(2)]
 	matrixAddr = 0x70         # Use address 0x70
 	
-	PWM.start(SERVO1, 50, 50) #duty, frequency
+	PWM.start(SERVO1, 7.5, 50) #duty, frequency
 	
 	global newMatrixVals
 	newMatrixVals = [0] * 16
@@ -39,9 +39,9 @@ def initGPIO():
 	clearMatrices()
 	
 	for i in range(10):
-		PWM.set_duty_cycle(SERVO1, 32)
+		PWM.set_duty_cycle(SERVO1, 7.5)
 		time.sleep(2)
-		PWM.set_duty_cycle(SERVO1, 38)
+		PWM.set_duty_cycle(SERVO1, 8.7)
 		time.sleep(2)
 	
 	#updateMatrix(LOW, [0, 0, 5, 8, 6, 0, 0, 0])
