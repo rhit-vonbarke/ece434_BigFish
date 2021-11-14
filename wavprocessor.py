@@ -53,7 +53,11 @@ def max_value_in_range(input_array, start, end):
     
 
 def processaudio(filename):
-    refreshrate = 10 #Hz
+    refreshrate = 15 #Hz
+    if len(sys.argv) > 2:
+        refreshrate = int(sys.argv[2])
+    if len(sys.argv) > 3:
+        downsample_ratio = int(sys.argv[3])
     bitdepth = 8
     downsample_ratio = 4
     #divisor = 2**bitdepth
@@ -77,6 +81,7 @@ def processaudio(filename):
     startindex = 0
     input('ready; press enter to start')
     while (startindex + chunklength) < numsamples:
+        timemark = time.time() + (1/refreshrate)
         chunk = a[startindex:(startindex + chunklength)]
         res = fft(chunk)
         spectrum = res[:len(res)//2 - 1]
@@ -86,7 +91,10 @@ def processaudio(filename):
         startindex += chunklength
         #print(len(spectrum))
         #print(str(len(spectrum)) + '\n' + str(spectrum))
-        time.sleep(1/refreshrate)
+        timecurr = time.time()
+        while timecurr < timemark:
+            timecurr = time.time()
+        print (timecurr)
 
 
 def main():
