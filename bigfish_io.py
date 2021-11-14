@@ -39,7 +39,7 @@ def initGPIO():
 	clearMatrices()
 	
 	for i in range(10):
-		PWM.set_duty_cycle(SERVO1, 40)
+		PWM.set_duty_cycle(SERVO1, 30)
 		time.sleep(2)
 		PWM.set_duty_cycle(SERVO1, 60)
 		time.sleep(2)
