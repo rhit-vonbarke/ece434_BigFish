@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#chmod +x io.py
+#chmod +x bigfish_io.py
 
 #io.py. 
 #Purpose: interface with IO
