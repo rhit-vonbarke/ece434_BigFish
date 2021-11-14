@@ -13,15 +13,15 @@ To install and run the project, ssh into your Beaglebone and follow the instruct
 
 ```bone$ git clone https://github.com/rhit-vonbarke/ece434_BigFish```
 
-2.) Navigate to the project directory and run install.sh. This only needs to be run the first time that you are running the program.
+2.) Navigate to the project directory and run install.sh. This only needs to be run the first time that you are running the program as it installs all of the needed libraries.
 
 ```bone$ bash install.sh```
 
-3.) Run setup.sh. This needs to be run every time before you want to run the program
+3.) Run setup.sh. This needs to be run every time after connecting to the bone before you want to run the program.
 
 ```bone$ bash setup.sh```
 
-4.) Run the program when you want to listen to the song
+4.) Run the program (this needs to be rerun every time you want to play a new song).
 
 ```bone$ ```
 
