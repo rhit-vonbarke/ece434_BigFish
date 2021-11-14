@@ -33,29 +33,37 @@ def set_LED_col_height(input_matrix, col, height):
         input_matrix[r][col] = 1
 
 def processaudio(filename):
-    refreshrate = 60 #Hz
+    refreshrate = 10 #Hz
     bitdepth = 8
+    downsample_ratio = 8
+    #divisor = 2**bitdepth
     parentpath = os.getcwd()
     filepath = (parentpath + '/audiodownloads/' + filename +'.wav')
     print ('File at: ' + filepath)
     fs, raw = wavfile.read(filepath)
+    fs /= downsample_ratio
     print ('Sampling rate (Hz): ' + str(fs))
-    numsamples = len(raw)
+    numsamples = len(raw) / downsample_ratio
     print ('Number of samples: ' + str(numsamples))
     #for i in range(numsamples):
     #    a[i] = (raw[i]/2**bitdepth) * 2 - 1 #normalize to the range [-1,1]
-    #a=[(ele/2**8.)*2-1 for ele in raw]
+    raw = raw[::downsample_ratio]
+    a=[(ele/2**8.)*2-1 for ele in raw]
+    print('Downsampled length: ' + str(len(a)))
     tracklength = int(numsamples / fs)
     chunklength = int(fs / refreshrate)
     print ('Track length (s): ' + str(tracklength))
     print ('Samples per chunk: ' + str(chunklength))
     startindex = 0
     while (startindex + chunklength) < numsamples:
-        chunk = raw[startindex:(startindex + chunklength)]
+        chunk = a[startindex:(startindex + chunklength)]
         res = fft(chunk)
-        spectrum = res[:len(res-1)]
+        spectrum = res[:len(res)//2 - 1]
+        print(len(spectrum))
+        spectrum = [abs(ele) for ele in spectrum]
         startindex += chunklength
-        print(str(len(spectrum)) + '\n' + str(spectrum))
+        print(len(spectrum))
+        #print(str(len(spectrum)) + '\n' + str(spectrum))
 
 
 def main():
