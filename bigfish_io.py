@@ -31,18 +31,18 @@ def initGPIO():
 	global newMatrixVals
 	newMatrixVals = [0] * 16
 	
-	#for bus in buses:
-	#	bus.write_byte_data(matrixAddr, 0x21, 0)   # Start oscillator
-	#	bus.write_byte_data(matrixAddr, 0x81, 0)   # Disp on, blink off
-	#	bus.write_byte_data(matrixAddr, 0xe7, 0)   # Full brightness
+	for bus in buses:
+		bus.write_byte_data(matrixAddr, 0x21, 0)   # Start oscillator
+		bus.write_byte_data(matrixAddr, 0x81, 0)   # Disp on, blink off
+		bus.write_byte_data(matrixAddr, 0xe7, 0)   # Full brightness
 	
 	clearMatrices()
 	
-	for i in range(10):
-		PWM.set_duty_cycle(SERVO1, 7.5)
-		time.sleep(2)
-		PWM.set_duty_cycle(SERVO1, 8.75)
-		time.sleep(2)
+	#for i in range(10):
+	#	PWM.set_duty_cycle(SERVO1, 7.5)
+	#	time.sleep(2)
+	#	PWM.set_duty_cycle(SERVO1, 8.75)
+	#	time.sleep(2)
 	
 	#updateMatrix(LOW, [0, 0, 5, 8, 6, 0, 0, 0])
 		
