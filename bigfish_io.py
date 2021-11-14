@@ -41,7 +41,7 @@ def initGPIO():
 	for i in range(10):
 		PWM.set_duty_cycle(SERVO1, 7.5)
 		time.sleep(2)
-		PWM.set_duty_cycle(SERVO1, 8.7)
+		PWM.set_duty_cycle(SERVO1, 8.75)
 		time.sleep(2)
 	
 	#updateMatrix(LOW, [0, 0, 5, 8, 6, 0, 0, 0])
