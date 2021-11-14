@@ -1,7 +1,8 @@
-### Dancing Fish
+# Dancing Fish
 
-# ECE434 - Embedded Linux Final Project
+### ECE434 Final Project
 
+This project uses the BeagleBone Black connected to a wired speaker to play music. The music is stored on the BeagleBone in .wav files after being downloaded from Youtube according to the user specifications. While the music is being played, two 8x8 LED matrices serve as a real-time visualizer and a dancing fish controlled by a servo is synchronized to the music.
 
 More information about this project can be found at [ELinux](https://elinux.org/ECE434_Project:_Dancing_Fish) and [hackster.io](https://www.hackster.io/littlestpetcat/dancing-fish-caf63e).
 
@@ -20,6 +21,8 @@ To install and run the project, ssh into your Beaglebone and follow the instruct
 
 ```bone$ bash setup.sh```
 
-4.) Run the program
+4.) Run the program when you want to listen to the song
 
 ```bone$ ```
+
+5.) When prompted enter the link to the Youtube video you would like to listen to
