@@ -4,7 +4,6 @@
 #arg 2 is the refresh rate
 
 if [ "$2" == "-d" ]; then
-    #echo 'downloaded'
     echo 'Downloading file...'
     ./download.sh "$1"
     echo 'Download complete.'
