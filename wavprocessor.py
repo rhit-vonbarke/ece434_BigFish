@@ -1,5 +1,3 @@
-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
-
 #!/usr/bin/python
 
 import os
@@ -66,14 +64,14 @@ def max_value_in_range(input_array, start, end):
     return max
     
 def processaudio(filename):
-    timemark = time.time() + 5
+    timemark = (int(sys.argv[2])/1000000000) + 5.6 #don't ask.
     refreshrate = 60 #Hz
-    if len(sys.argv) > 2:
-        refreshrate = int(sys.argv[2])
     if len(sys.argv) > 3:
-        downsample_ratio = int(sys.argv[3])
+        refreshrate = int(sys.argv[3])
+    #if len(sys.argv) > 3:
+    #    downsample_ratio = int(sys.argv[3])
     bitdepth = 8
-    downsample_ratio = 4
+    #downsample_ratio = 4
     #divisor = 2**bitdepth
     parentpath = os.getcwd()
     filepath = (parentpath + '/audiodownloads/' + filename +'.wav')
@@ -100,15 +98,15 @@ def processaudio(filename):
     log_steps = [10, 16.1, 25.9, 41.6, 66.9, 107.5, 172.9, 278.1, 447.2, 719.2, 1156.5, 1859.8, 2990.7, 4809.4, 7733.9, 12437, 20000]
     freq_steps = [int((step * chunklength) // fs) for step in log_steps]
     mvoice = [85, 155]
-    freq_mvoice = int((step * chunklength) // fs) for step in mvoice]
+    freq_mvoice = [int((step * chunklength) // fs) for step in mvoice]
     fvoice = [165, 255]
-    freq_fvoice = int((step * chunklength) // fs) for step in fvoice]
+    freq_fvoice = [int((step * chunklength) // fs) for step in fvoice]
     #input('ready; press enter to start')
     currtime = time.time()
-    time.sleep(timemark - currtime)
-    #while (currtime < timemark):
-    #    currtime = time.time()
     iter = 4
+    #time.sleep(timemark - currtime)
+    while (currtime < timemark):
+        currtime = time.time()
     while (startindex + chunklength) < numsamples:
         timemark = time.time() + (1/refreshrate)
         chunk = raw[startindex:(startindex + chunklength)]
@@ -121,7 +119,8 @@ def processaudio(filename):
         #print(len(spectrum))
         #print(str(len(spectrum)) + '\n' + str(spectrum))
         timecurr = time.time()
-        if(!iter):
+        iter -= 1
+        if(iter == 0):
             iter = 4
             map_to_servo(spectrum, freq_mvoice, freq_fvoice)
         while timecurr < timemark:
