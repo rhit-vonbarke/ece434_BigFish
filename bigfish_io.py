@@ -65,6 +65,12 @@ def updateMatrix(matrix, values = []):
 		newMatrixVals[2*k+1] = RED_BITMASK & newVal
 	buses[matrix].write_i2c_block_data(matrixAddr, 0, newMatrixVals)
 	
+
+def updateServo(position):
+	#Updates the Servo to a new position
+	#Input position is in the range or -1 to 1 which maps to -90 to 90 degrees
+	PWM.set_duty_cycle(SERVO1, (position*2.5+7.5))
+	
   
 def getValFromHeight(value):
 	if (value == 0):
