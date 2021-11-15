@@ -37,6 +37,17 @@ def map_to_LED_matrix(input_array, steps):
     bfio.updateMatrix(bfio.LOW, matrix_lo)
     bfio.updateMatrix(bfio.HIGH, matrix_hi)
 
+def map_to_servo(input_array, mrange, frange):
+    val = 0
+    maxm = max_value_in_range(input_array, mrange[0], mrange[1])
+    maxf = max_value_in_range(input_array, frange[0], frange[1])
+    if(abs(maxm) > abs(maxf)):
+        val = maxm
+    else:
+        val = maxf
+    if(abs(val) > 1):
+        val = val/abs(val)
+    bfio.updateServo(val)
 
 def avg_value_in_range(input_array, start, end):
     sum = 0
@@ -88,11 +99,16 @@ def processaudio(filename):
     startindex = 0
     log_steps = [10, 16.1, 25.9, 41.6, 66.9, 107.5, 172.9, 278.1, 447.2, 719.2, 1156.5, 1859.8, 2990.7, 4809.4, 7733.9, 12437, 20000]
     freq_steps = [int((step * chunklength) // fs) for step in log_steps]
+    mvoice = [85, 155]
+    freq_mvoice = int((step * chunklength) // fs) for step in mvoice]
+    fvoice = [165, 255]
+    freq_fvoice = int((step * chunklength) // fs) for step in fvoice]
     #input('ready; press enter to start')
     currtime = time.time()
     time.sleep(timemark - currtime)
     #while (currtime < timemark):
     #    currtime = time.time()
+    iter = 4
     while (startindex + chunklength) < numsamples:
         timemark = time.time() + (1/refreshrate)
         chunk = raw[startindex:(startindex + chunklength)]
@@ -105,6 +121,9 @@ def processaudio(filename):
         #print(len(spectrum))
         #print(str(len(spectrum)) + '\n' + str(spectrum))
         timecurr = time.time()
+        if(!iter):
+            iter = 4
+            map_to_servo(spectrum, freq_mvoice, freq_fvoice)
         while timecurr < timemark:
             timecurr = time.time()
         #print (timecurr)
