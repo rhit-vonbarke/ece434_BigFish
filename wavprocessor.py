@@ -6,7 +6,6 @@ import bigfish_io as bfio
 from scipy.fftpack import fft
 from scipy.io import wavfile
 import time
-import subprocess
 
 # maximum amplitude to adjust spectrum values
 amp_max = 0.1
