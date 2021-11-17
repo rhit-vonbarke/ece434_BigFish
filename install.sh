@@ -8,5 +8,10 @@ sudo apt update
 sudo add-apt-repository ppa:jonathonf/ffmpeg-4
 sudo apt install ffmpeg
 mkdir "audiodownloads"
-#test code; comment out later
-youtube-dl -x --audio-format wav https://www.youtube.com/watch?v=diSjU2Go1mM
+sudo apt-get update
+sudo apt-get install build-essential python-dev python-pip python-smbus -y
+git clone git://github.com/adafruit/adafruit-beaglebone-io-python.git
+cd adafruit-beaglebone-io-python
+sudo python setup.py install
+cd ..
+sudo rm -rf adafruit-beaglebone-io-python
