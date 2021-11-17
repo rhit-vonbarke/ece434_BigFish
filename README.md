@@ -19,10 +19,10 @@ To install and run the project, ssh into your Beaglebone and follow the instruct
 
 3.) Run setup.sh. This needs to be run every time after connecting to the bone before you want to run the program.
 
-```bone$ bash setup.sh```
+```bone$ sudo bash setup.sh```
 
-4.) Run the program (this needs to be rerun every time you want to play a new song).
+4.) Find a youtube video you would like to listen to and copy the youtube ID within the link. For example, for the link https://youtu.be/I4ZDWBBBsJ4, the youtube id is I4ZDWBBBsJ4.
 
-```bone$ ```
+5.) Run the program using the previously copied youtube id (this needs to be rerun every time you want to play a new song). Additionally, the -d specifies that the video needs to be downloaded before playing so it can be discluded if you have already listened to the song once.
 
-5.) When prompted enter the link to the Youtube video you would like to listen to
+```bone$ ./runvisualizer [video-id] [-d]```
